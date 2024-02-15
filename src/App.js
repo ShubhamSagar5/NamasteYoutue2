@@ -9,7 +9,7 @@ function App() {
   return (
     
     <Provider store={Store}>
-         <div className=" ">
+         <div className="">
         <Head/>
         <Body/>
     </div>
