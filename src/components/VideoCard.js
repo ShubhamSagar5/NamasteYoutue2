@@ -4,7 +4,7 @@ import { YOUTUBE_API_KEY } from "../Utilis/Constant/Constant"
 
 const VideoCard = ({video}) => {
     
-    console.log(video)
+
 
     const {snippet,statistics} =video
     
