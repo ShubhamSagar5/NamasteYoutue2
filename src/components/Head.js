@@ -27,7 +27,14 @@ const Head = () => {
   
 
   useEffect(()=>{
-    getSuggestionlist()
+   
+    const timer  = setTimeout(()=> getSuggestionlist(),200) 
+
+
+    return () => {
+      clearTimeout(timer)
+    }
+   
   },[searchText])
   
     return (
@@ -52,12 +59,14 @@ const Head = () => {
         <button className="h-8 bg-gray-200 px-[14px] border border-gray-600 rounded-r-full"> 🔍</button>
       </div>
       { searchSuggestionShow && <div className="p-2 m-1 mt-[35px] bg-gray-100 w-[31%] rounded-lg absolute">
-        <ul>
+    
+         <ul>
          {
           searchList?.map((s)=><li key={s} className=" shadow-lg  hover:bg-gray-300 p-2 px-2 border border-gray-300 rounded-lg mt-1">🔍 {s}</li>)
          } 
           
         </ul>
+   
       </div>}
 
       </div>
