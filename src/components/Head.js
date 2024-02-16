@@ -1,15 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSideBarMenu } from "../Utilis/ReduxStore/appSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_SUGGESTION_API } from "../Utilis/Constant/Constant";
+import { addCache } from "../Utilis/ReduxStore/CacheSlice";
 
 const Head = () => {
   
   const dispatch = useDispatch()
+  const searchCache = useSelector((store)=>store.cache)
 
   const [searchText,setSearchText] = useState('')
-  const [searchSuggestionShow,setSearchSuggestionShow] = useState(true)
+  const [searchSuggestionShow,setSearchSuggestionShow] = useState(false)
   const [searchList,setSearchList] = useState([])
 
     const handleSideBarMenu = () => {
@@ -18,9 +20,14 @@ const Head = () => {
   }
 
   const getSuggestionlist = async() => {
+    console.log("api called")
     const data = await fetch(YOUTUBE_SEARCH_SUGGESTION_API+searchText)
     const json = await data.json()
     setSearchList(json[1])
+
+    dispatch(addCache({
+      [searchText]:json[1]
+    }))
     
   }
 
@@ -28,7 +35,18 @@ const Head = () => {
 
   useEffect(()=>{
    
-    const timer  = setTimeout(()=> getSuggestionlist(),200) 
+    const timer  = setTimeout(()=> {
+      if(searchCache[searchText]){
+        setSearchList(searchCache[searchText])
+      }else{
+        
+         getSuggestionlist()
+         
+      }
+      
+     
+      
+    },200) 
 
 
     return () => {

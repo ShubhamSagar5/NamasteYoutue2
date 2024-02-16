@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { closeMenu } from "../Utilis/ReduxStore/appSlice"
 import { useSearchParams } from "react-router-dom"
 import { YOUTUBE_API_KEY } from "../Utilis/Constant/Constant"
+import CommentsContainer from "./CommentsContainer"
 
 
 
@@ -41,6 +42,9 @@ console.log(json)
             <div>
                 livechat
             </div>
+          </div>
+          <div>
+            <CommentsContainer/>
           </div>
         </div>
     )
