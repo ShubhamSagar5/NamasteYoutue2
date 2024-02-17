@@ -4,6 +4,7 @@ import { closeMenu } from "../Utilis/ReduxStore/appSlice"
 import { useSearchParams } from "react-router-dom"
 import { YOUTUBE_API_KEY } from "../Utilis/Constant/Constant"
 import CommentsContainer from "./CommentsContainer"
+import LiveChat from "./LiveChat"
 
 
 
@@ -39,8 +40,8 @@ console.log(json)
             <div>
             <iframe className=" rounded-lg" width="796" height="448" src={"https://www.youtube.com/embed/"+videoId} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></iframe>
             </div>
-            <div>
-                livechat
+            <div className="w-full">
+                <LiveChat/>
             </div>
           </div>
           <div>
